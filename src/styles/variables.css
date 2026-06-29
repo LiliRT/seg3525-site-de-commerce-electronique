@@ -1,0 +1,46 @@
+:root{
+
+  /* Couleurs */
+
+  --background:#F8F5F0;
+  --card:#FFFFFF;
+
+  --text:#2D2A26;
+
+  --accent:#8B5E3C;
+
+  --button:#5C4033;
+
+  --button-hover:#A16A45;
+
+  --border:#DDD4CA;
+
+  --success:#5A8F5A;
+
+  --error:#C94A4A;
+
+
+  /* Typographie */
+
+  --font-title:'Merriweather', serif;
+
+  --font-body:'Inter', sans-serif;
+
+
+  /* Espacements */
+
+  --spacing-xs:4px;
+  --spacing-sm:8px;
+  --spacing-md:16px;
+  --spacing-lg:24px;
+  --spacing-xl:40px;
+
+  /* Radius */
+
+  --radius:10px;
+
+  /* Ombres */
+
+  --shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
