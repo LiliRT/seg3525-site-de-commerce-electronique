@@ -29,12 +29,87 @@ HEADER
 .logo{
 
     font-family:var(--font-title);
-
     color:var(--accent);
-
     font-size:1.6rem;
-
     font-weight:bold;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.logo svg {
+    transition: transform .2s ease;
+}
+
+.logo:hover svg {
+    transform: rotate(-3deg) scale(1.1);
+}
+
+.flying-book{
+    position:fixed;
+    z-index:99999;
+    pointer-events:none;
+
+    font-size:42px;
+
+    color:#8B5E3C;
+
+    transition:
+        left 1.2s cubic-bezier(.22,.61,.36,1),
+        top 1.2s cubic-bezier(.22,.61,.36,1),
+        transform 1.2s cubic-bezier(.22,.61,.36,1),
+        opacity 1.2s;
+}
+
+.cart-bump{
+
+    animation:cartBump .28s;
+}
+
+@keyframes cartBump{
+
+    0%{
+        transform:scale(1);
+    }
+
+    35%{
+        transform:scale(1.15);
+    }
+
+    60%{
+        transform:scale(.96);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+.cart-link {
+    position: relative;
+}
+
+.cart-tooltip {
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    background: #2D2A26;
+    color: white;
+    padding: .3rem .5rem;
+    border-radius: 6px;
+    font-size: .7rem;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: .2s;
+    white-space: nowrap;
+}
+
+.cart-link:hover .cart-tooltip {
+    opacity: 1;
 }
 
 /* ===========================
@@ -110,14 +185,35 @@ FOOTER
 
     display:grid;
 
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(3, minmax(220px,1fr));
 
-    gap:3rem;
+    gap:4rem;
+
+    align-items:start;
+
+    justify-items:center;
+
+    text-align:left;
 }
+
+/* .footer-grid > div{
+
+    width:100%;
+    max-width:260px;
+} */
 
 .footer h3{
 
     color:white;
+
+    margin-bottom:1.2rem;
+
+    font-size:1.2rem;
+}
+
+.footer ul{
+
+    padding:0;
 }
 
 .footer li{
@@ -132,11 +228,17 @@ FOOTER
 
 .copyright{
 
-    margin-top:2rem;
+    margin-top:3rem;
+
+    padding-top:1.5rem;
+
+    border-top:1px solid rgba(255,255,255,.12);
 
     text-align:center;
 
-    opacity:.7;
+    color:#bdbdbd;
+
+    font-size:.9rem;
 }
 
 /* ===========================
@@ -163,6 +265,80 @@ PROMO
     border-radius:var(--radius);
     cursor:pointer;
     font-weight:600;
+}
+
+.promo-bar button:hover {
+    background-color: var(--text);
+    color: white;
+}
+
+/* ===========================
+SNACKBAR
+=========================== */
+
+.cart-snackbar{
+
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+
+    background:#2D2A26;
+    color:white;
+
+    padding:.8rem 1rem;
+    border-radius:var(--radius);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:1rem;
+
+    box-shadow:var(--shadow);
+
+    z-index:9999;
+
+    min-width:260px;
+}
+
+.cart-snackbar-actions{
+
+    display:flex;
+    gap:.5rem;
+}
+
+.cart-snackbar button{
+
+    background:transparent;
+    border:1px solid white;
+    color:white;
+
+    padding:.3rem .6rem;
+    border-radius:var(--radius);
+
+    cursor:pointer;
+}
+
+.cart-snackbar button:hover{
+    background:white;
+    color:#2D2A26;
+}
+
+.cart-snackbar::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    height:3px;
+    width:100%;
+    background:var(--accent);
+    animation: shrink 5s linear forwards;
+}
+
+@keyframes shrink{
+    from { width:100%; }
+    to { width:0%; }
 }
 
 /* ===========================

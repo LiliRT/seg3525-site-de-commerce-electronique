@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Button from "../common/Button";
+
 import { useCart } from "../../context/CartContext";
+import BookCover from "../books/BookCover";
 
 export default function BookCard({ book }) {
 
@@ -10,37 +12,38 @@ export default function BookCard({ book }) {
         <div className="book-card">
 
             <Link to={`/livre/${book.id}`}>
-                <img
-                    src={book.cover}
-                    alt={book.title}
-                    className="book-cover"
+                <BookCover
+                    title={book.title}
+                    author={book.author}
+                    genre={book.genre}
                 />
-            </Link>
+            
+                <div className="book-info">
 
-            <div className="book-info">
+                    <h3>{book.title}</h3>
+                    <p className="author">{book.author}</p>
+                    <p className="price">{book.price.toFixed(2)} $</p>
 
-                <h3>{book.title}</h3>
+                    <div className="book-actions">
 
-                <p className="author">{book.author}</p>
+                        <Button
+                            onClick={(e) => addToCart(book, e.currentTarget)}
+                            variant="primary"
+                        >
+                            Ajouter au panier
+                        </Button>
 
-                <p className="price">{book.price.toFixed(2)} $</p>
+                        <Link
+                            to={`/livre/${book.id}`}
+                            className="btn btn-secondary"
+                        >
+                            Voir les détails
+                        </Link>
 
-                <div className="book-actions">
-
-                    <Button onClick={() => addToCart(book)}>
-                        Ajouter au panier
-                    </Button>
+                    </div>
 
                 </div>
-
-                <Link
-                    to={`/livre/${book.id}`}
-                    className="btn btn-secondary"
-                >
-                    Voir détails
-                </Link>
-
-            </div>
+            </Link>
 
         </div>
     );

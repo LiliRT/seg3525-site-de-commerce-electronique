@@ -25,7 +25,7 @@ export default function SurveyForm() {
 
                 <h2>Merci pour votre retour 🎉</h2>
 
-                <p>Votre avis nous aide à améliorer BookNest.</p>
+                <p>Votre avis nous aide à améliorer Codex.</p>
 
             </div>
         );

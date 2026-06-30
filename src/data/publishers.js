@@ -1,5 +1,5 @@
 const publishers = [
-    "BookNest Éditions",
+    "Codex Éditions",
     "Maple Press",
     "Éditions Lumière",
     "Atlas Publishing",

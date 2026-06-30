@@ -10,7 +10,7 @@ export default function Footer() {
 
                 <div>
 
-                    <h3>BookNest</h3>
+                    <h3>Codex</h3>
 
                     <p>
 
@@ -61,9 +61,9 @@ export default function Footer() {
 
                     <h3>Nous joindre</h3>
 
-                    <p>info@booknest.ca</p>
+                    <p><a href="mailto:info@codex.ca">info@codex.ca</a></p>
 
-                    <p>+1 (555) 555-1234</p>
+                    <p><a href="tel:16131231234">+1 (613) 123-1234</a></p>
 
                 </div>
 
@@ -71,7 +71,7 @@ export default function Footer() {
 
             <div className="copyright">
 
-                © 2026 BookNest
+                © 2026 Codex
 
             </div>
 

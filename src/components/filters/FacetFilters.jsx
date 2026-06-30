@@ -36,7 +36,11 @@ export default function FacetFilters({
                             <i className="bi bi-arrow-counterclockwise"></i>
                         </button>
 
-                        <button className="close-btn" onClick={onClose}>
+                        <button
+                            className="close-btn"
+                            onClick={onClose}
+                            aria-label="Fermer les filtres"
+                        >
                             <i className="bi bi-x-lg"></i>
                         </button>
 
@@ -87,7 +91,7 @@ export default function FacetFilters({
                         countByFacet={(value) => countByFacet("publisher", value)}
                     />
 
-                    <button className="btn btn-secondary" onClick={onReset}>
+                    <button className="btn btn-secondary mobile" onClick={onReset}>
                         Réinitialiser les filtres
                     </button>
 

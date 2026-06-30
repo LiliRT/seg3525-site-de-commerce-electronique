@@ -7,7 +7,7 @@ const books = [
     language: "Français",
     originalYear: 1844,
     editionYear: 2024,
-    publisher: "BookNest Éditions",
+    publisher: "Codex Éditions",
     formats: ["Papier", "Numérique"],
     pages: 1276,
     isbn: "978-2-0000-0001-1",
@@ -15,7 +15,6 @@ const books = [
     stock: 18,
     featured: true,
     rating: 4.9,
-    cover: "/images/books/monte-cristo.jpg",
     description:
         "Accusé à tort, Edmond Dantès prépare une vengeance magistrale après des années d'emprisonnement. Un grand classique mêlant aventure, justice et rédemption."
 },
@@ -35,7 +34,6 @@ const books = [
     stock: 12,
     featured: true,
     rating: 4.8,
-    cover: "/images/books/les-miserables.jpg",
     description:
         "L'histoire de Jean Valjean explore la justice, la misère et l'espoir dans la France du XIXe siècle."
 },
@@ -55,7 +53,6 @@ const books = [
     stock: 22,
     featured: false,
     rating: 4.7,
-    cover: "/images/books/orgueil-prejuges.jpg",
     description:
         "Elizabeth Bennet et M. Darcy apprennent à dépasser leurs préjugés dans ce classique intemporel."
 },
@@ -75,7 +72,6 @@ const books = [
     stock: 8,
     featured: false,
     rating: 4.6,
-    cover: "/images/books/jane-eyre.jpg",
     description:
         "Une jeune gouvernante indépendante voit sa vie bouleversée en rencontrant le mystérieux Edward Rochester."
 },
@@ -95,7 +91,6 @@ const books = [
     stock: 14,
     featured: false,
     rating: 4.5,
-    cover: "/images/books/madame-bovary.jpg",
     description:
         "Emma Bovary rêve d'une existence passionnée, bien loin de son quotidien provincial."
 },
@@ -115,7 +110,6 @@ const books = [
     stock: 9,
     featured: false,
     rating: 4.7,
-    cover: "/images/books/don-quichotte.jpg",
     description:
         "Le célèbre chevalier errant poursuit des aventures aussi héroïques qu'imaginaires."
 },
@@ -127,7 +121,7 @@ const books = [
     language: "Français",
     originalYear: 1937,
     editionYear: 2024,
-    publisher: "BookNest Éditions",
+    publisher: "Codex Éditions",
     formats: ["Papier", "Numérique"],
     pages: 384,
     isbn: "978-2-0000-0007-3",
@@ -135,7 +129,6 @@ const books = [
     stock: 27,
     featured: true,
     rating: 4.9,
-    cover: "/images/books/hobbit.jpg",
     description:
         "Bilbon Sacquet quitte sa vie tranquille pour une aventure remplie de dragons, de trésors et de créatures fantastiques."
 },
@@ -147,7 +140,7 @@ const books = [
     language: "Français",
     originalYear: 1954,
     editionYear: 2024,
-    publisher: "BookNest Éditions",
+    publisher: "Codex Éditions",
     formats: ["Papier", "Numérique"],
     pages: 576,
     isbn: "978-2-0000-0008-0",
@@ -155,7 +148,6 @@ const books = [
     stock: 20,
     featured: true,
     rating: 5.0,
-    cover: "/images/books/lotr1.jpg",
     description:
         "Frodon entreprend une quête périlleuse pour détruire l'Anneau Unique et sauver la Terre du Milieu."
 },
@@ -175,7 +167,6 @@ const books = [
     stock: 24,
     featured: false,
     rating: 4.6,
-    cover: "/images/books/narnia1.jpg",
     description:
         "Quatre enfants découvrent le monde magique de Narnia en franchissant une simple armoire."
 },
@@ -195,7 +186,6 @@ const books = [
     stock: 16,
     featured: false,
     rating: 4.5,
-    cover: "/images/books/oz.jpg",
     description:
         "Dorothy, son chien Toto et ses nouveaux amis parcourent un monde merveilleux à la recherche du Magicien d'Oz."
 },
@@ -215,7 +205,6 @@ const books = [
     stock: 18,
     featured: false,
     rating: 4.6,
-    cover: "/images/books/alice.jpg",
     description:
         "Alice tombe dans un terrier de lapin et découvre un univers rempli de personnages extravagants."
 },
@@ -227,7 +216,7 @@ const books = [
     language: "Français",
     originalYear: 1870,
     editionYear: 2024,
-    publisher: "BookNest Éditions",
+    publisher: "Codex Éditions",
     formats: ["Papier", "Numérique"],
     pages: 512,
     isbn: "978-2-0000-0012-7",
@@ -235,7 +224,6 @@ const books = [
     stock: 21,
     featured: true,
     rating: 4.8,
-    cover: "/images/books/20000-lieues.jpg",
     description:
         "Le professeur Aronnax embarque à bord du Nautilus et découvre les mystères des profondeurs avec le capitaine Nemo."
 },
@@ -255,7 +243,6 @@ const books = [
     stock: 14,
     featured: false,
     rating: 4.7,
-    cover: "/images/books/guerre-des-mondes.jpg",
     description:
         "Une invasion martienne met l'humanité face à une menace sans précédent."
 },
@@ -275,7 +262,6 @@ const books = [
     stock: 25,
     featured: false,
     rating: 4.5,
-    cover: "/images/books/machine-temps.jpg",
     description:
         "Un scientifique voyage dans un futur lointain et découvre l'évolution de l'humanité."
 },
@@ -295,7 +281,6 @@ const books = [
     stock: 19,
     featured: false,
     rating: 4.4,
-    cover: "/images/books/terre-lune.jpg",
     description:
         "Des passionnés d'artillerie imaginent un projet audacieux : envoyer des hommes vers la Lune."
 },
@@ -307,7 +292,7 @@ const books = [
     language: "Français",
     originalYear: 1902,
     editionYear: 2024,
-    publisher: "BookNest Éditions",
+    publisher: "Codex Éditions",
     formats: ["Papier", "Numérique"],
     pages: 304,
     isbn: "978-2-0000-0016-5",
@@ -315,7 +300,6 @@ const books = [
     stock: 17,
     featured: false,
     rating: 4.8,
-    cover: "/images/books/baskerville.jpg",
     description:
         "Sherlock Holmes enquête sur une mystérieuse malédiction qui semble frapper la famille Baskerville."
 },
@@ -335,7 +319,6 @@ const books = [
     stock: 13,
     featured: true,
     rating: 4.9,
-    cover: "/images/books/orient-express.jpg",
     description:
         "Le détective Hercule Poirot doit résoudre un meurtre commis dans un train immobilisé par la neige."
 },
@@ -355,7 +338,6 @@ const books = [
     stock: 26,
     featured: false,
     rating: 4.5,
-    cover: "/images/books/rue-morgue.jpg",
     description:
         "Considérée comme la première enquête policière moderne, cette nouvelle met en scène le détective Auguste Dupin."
 },
@@ -375,7 +357,6 @@ const books = [
     stock: 15,
     featured: false,
     rating: 4.6,
-    cover: "/images/books/chambre-jaune.jpg",
     description:
         "Un crime impossible commis dans une pièce fermée intrigue le journaliste Rouletabille."
 },
@@ -395,7 +376,6 @@ const books = [
     stock: 20,
     featured: false,
     rating: 4.7,
-    cover: "/images/books/banquet.jpg",
     description:
         "Des philosophes athéniens discutent de la nature de l'amour lors d'un banquet mémorable."
 },
@@ -415,7 +395,6 @@ const books = [
     stock: 11,
     featured: false,
     rating: 4.8,
-    cover: "/images/books/zarathoustra.jpg",
     description:
         "Une œuvre philosophique majeure explorant le dépassement de soi et la notion de surhomme."
 },
@@ -435,7 +414,6 @@ const books = [
     stock: 18,
     featured: false,
     rating: 4.7,
-    cover: "/images/books/meditations.jpg",
     description:
         "Réflexions personnelles de l'empereur romain sur la sagesse, la vertu et la maîtrise de soi."
 },
@@ -455,7 +433,6 @@ const books = [
     stock: 21,
     featured: false,
     rating: 4.6,
-    cover: "/images/books/phedon.jpg",
     description:
         "Dialogue philosophique sur l'immortalité de l'âme et les derniers instants de Socrate."
 },
@@ -467,7 +444,7 @@ const books = [
     language: "Français",
     originalYear: 1847,
     editionYear: 2024,
-    publisher: "BookNest Éditions",
+    publisher: "Codex Éditions",
     formats: ["Papier", "Numérique"],
     pages: 832,
     isbn: "978-2-0000-0024-0",
@@ -475,7 +452,6 @@ const books = [
     stock: 9,
     featured: false,
     rating: 4.6,
-    cover: "/images/books/revolution.jpg",
     description:
         "Une analyse détaillée de la Révolution française et de ses conséquences politiques et sociales."
 },
@@ -495,7 +471,6 @@ const books = [
     stock: 14,
     featured: false,
     rating: 4.5,
-    cover: "/images/books/guerre-gaules.jpg",
     description:
         "Récit militaire de Jules César sur la conquête de la Gaule par Rome."
 },
@@ -515,7 +490,6 @@ const books = [
     stock: 7,
     featured: true,
     rating: 4.7,
-    cover: "/images/books/memoires.jpg",
     description:
         "Autobiographie politique et littéraire d'un témoin majeur de l'époque napoléonienne."
 },
@@ -527,7 +501,7 @@ const books = [
     language: "Français",
     originalYear: 1943,
     editionYear: 2024,
-    publisher: "BookNest Éditions",
+    publisher: "Codex Éditions",
     formats: ["Papier", "Numérique"],
     pages: 96,
     isbn: "978-2-0000-0027-1",
@@ -535,7 +509,6 @@ const books = [
     stock: 30,
     featured: true,
     rating: 5.0,
-    cover: "/images/books/petit-prince.jpg",
     description:
         "Un pilote rencontre un jeune prince venu d'une autre planète, dans une histoire poétique et philosophique."
 },
@@ -555,7 +528,6 @@ const books = [
     stock: 19,
     featured: false,
     rating: 4.6,
-    cover: "/images/books/tom-sawyer.jpg",
     description:
         "Les aventures d'un jeune garçon espiègle le long du Mississippi."
 },
@@ -575,7 +547,6 @@ const books = [
     stock: 22,
     featured: false,
     rating: 4.5,
-    cover: "/images/books/little-nemo.jpg",
     description:
         "Une bande dessinée pionnière explorant les rêves fantastiques d'un jeune garçon nommé Nemo."
 },
@@ -595,7 +566,6 @@ const books = [
     stock: 25,
     featured: false,
     rating: 4.4,
-    cover: "/images/books/yellow-kid.jpg",
     description:
         "L'une des premières bandes dessinées modernes, centrée sur un personnage emblématique du journalisme américain."
 },

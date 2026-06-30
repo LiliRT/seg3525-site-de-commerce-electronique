@@ -1,42 +1,81 @@
 export default function Help() {
 
     return (
-        <main className="container section">
+        <main className="container section help-page">
 
-            <h1>Aide</h1>
+            <h1>Centre d’aide</h1>
 
-            <section className="help-section">
+            <p className="help-intro">
+                Retrouvez ici les réponses aux questions les plus fréquentes.
+            </p>
 
-                <h2>Comment acheter un livre ?</h2>
+            <div className="help-grid">
 
-                <ol>
-                    <li>Ajoutez un livre au panier</li>
-                    <li>Consultez votre panier</li>
-                    <li>Procédez au paiement</li>
-                    <li>Confirmez votre commande</li>
-                </ol>
+                <section className="help-card">
 
-            </section>
+                    <h2>
+                        <i className="bi bi-cart-check me-2"></i>
+                        {" "}Acheter un livre
+                    </h2>
 
-            <section className="help-section">
+                    <ol>
+                        <li>Ajoutez un livre au panier</li>
+                        <li>Ouvrez votre panier</li>
+                        <li>Vérifiez votre sélection</li>
+                        <li>Procédez au paiement</li>
+                        <li>Confirmez votre commande</li>
+                    </ol>
 
-                <h2>Comment utiliser les filtres ?</h2>
+                </section>
 
-                <p>
-                    Utilisez les filtres à gauche du catalogue pour affiner votre recherche par genre, langue, prix ou format.
-                </p>
+                <section className="help-card">
 
-            </section>
+                    <h2>
+                        <i className="bi bi-funnel me-2"></i>
+                        {" "}Utiliser les filtres
+                    </h2>
 
-            <section className="help-section">
+                    <p>
+                        Dans le catalogue, utilisez les filtres pour affiner votre recherche.
+                    </p>
 
-                <h2>Besoin d’assistance ?</h2>
+                    <p className="help-tip">
+                        Astuce : combine plusieurs filtres pour affiner les résultats.
+                    </p>
 
-                <p>
-                    Contactez notre support fictif via ce projet universitaire.
-                </p>
+                </section>
 
-            </section>
+                <section className="help-card">
+
+                    <h2>
+                        <i className="bi bi-box-seam me-2"></i>
+                        {" "}Suivi de commande
+                    </h2>
+
+                    <p>
+                        Consultez vos commandes depuis votre espace utilisateur.
+                    </p>
+
+                </section>
+
+                <section className="help-card">
+
+                    <h2>
+                        <i className="bi bi-headset me-2"></i>
+                        {" "}Support
+                    </h2>
+
+                    <p>
+                        Ce projet est fictif, mais vous pouvez simuler un contact support.
+                    </p>
+
+                    <a href="mailto:info@codex.ca" className="btn btn-secondary">
+                        Contacter le support
+                    </a>
+
+                </section>
+
+            </div>
 
         </main>
     );

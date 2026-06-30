@@ -1,48 +1,6 @@
-// import { useNavigate } from "react-router-dom";
-// import SearchBar from "../components/layout/SearchBar";
-
-// export default function Home() {
-
-//     const navigate = useNavigate();
-
-//     return (
-//         <main>
-
-//             <section className="section">
-
-//                 <div className="container home-hero">
-
-//                     <h1>
-//                         Découvrez votre prochaine lecture
-//                     </h1>
-
-//                     <p>
-//                         Explorez romans, essais, bandes dessinées et ouvrages spécialisés grâce à une recherche simple et intuitive.
-//                     </p>
-
-//                     <SearchBar />
-
-//                     <div className="home-actions">
-
-//                         <button
-//                             className="btn btn-primary"
-//                             onClick={() => navigate("/catalogue")}
-//                         >
-//                             <i className="bi bi-grid"></i>{" "}
-//                             Explorer le catalogue
-//                         </button>
-
-//                     </div>
-
-//                 </div>
-
-//             </section>
-
-//         </main>
-//     );
-// }
-
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import SearchBar from "../components/layout/SearchBar";
 import books from "../data/books";
 import BookGrid from "../components/books/BookGrid";
@@ -52,6 +10,18 @@ export default function Home() {
     const navigate = useNavigate();
 
     const featuredBooks = books.slice(0, 4);
+
+    const [search, setSearch] = useState("");
+
+    const submitSearch = () => {
+
+        navigate("/catalogue", {
+            state: {
+                search
+            }
+        });
+
+    };
 
     return (
         <main>
@@ -69,13 +39,22 @@ export default function Home() {
                         Explorez des romans, essais et bandes dessinées soigneusement sélectionnés pour enrichir votre expérience de lecture.
                     </p>
 
-                    <SearchBar />
+                    <SearchBar
+                        value={search}
+                        onChange={setSearch}
+                        onSubmit={submitSearch}
+                        showButton
+                    />
 
                     <div className="home-actions">
 
                         <button
                             className="btn btn-primary"
-                            onClick={() => navigate("/catalogue")}
+                            onClick={() => navigate("/catalogue", {
+                                state: {
+                                    scrollToTop: true
+                                }
+                            })}
                         >
                             <i className="bi bi-grid"></i>{" "}
                             Explorer le catalogue
@@ -103,11 +82,13 @@ export default function Home() {
                     <button
                         className="btn btn-secondary"
                         onClick={() =>
-                            navigate("/catalogue", {
-                                state: {
-                                    genre: ["Roman classique", "Philosophie"]
+                            navigate(
+                                "/catalogue?genre=Roman%20classique&genre=Philosophie", {
+                                    state: {
+                                        scrollToTop: true
+                                    }
                                 }
-                            })
+                            )
                         }
                     >
                         Voir les offres

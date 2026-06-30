@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useRef } from "react";
 
 const CartContext = createContext();
 
@@ -9,10 +9,11 @@ export function useCart() {
 export function CartProvider({ children }) {
 
     const [cart, setCart] = useState([]);
+    const cartRef = useRef();
 
     // Charger depuis localStorage
     useEffect(() => {
-        const storedCart = localStorage.getItem("booknest_cart");
+        const storedCart = localStorage.getItem("codex_cart");
         if (storedCart) {
             setCart(JSON.parse(storedCart));
         }
@@ -20,26 +21,88 @@ export function CartProvider({ children }) {
 
     // Sauvegarder dans localStorage
     useEffect(() => {
-        localStorage.setItem("booknest_cart", JSON.stringify(cart));
+        localStorage.setItem("codex_cart", JSON.stringify(cart));
     }, [cart]);
 
     // Ajouter un livre
-    const addToCart = (book) => {
-        setCart((prev) => {
+    // const addToCart = (book, event) => {
+    //     setCart((prev) => {
 
-            const existing = prev.find(item => item.id === book.id);
+    //         const existing = prev.find(item => item.id === book.id);
 
-            if (existing) {
-                return prev.map(item =>
-                    item.id === book.id
-                        ? { ...item, quantity: item.quantity + 1 }
-                        : item
-                );
-            }
+    //         if (existing) {
+    //             return prev.map(item =>
+    //                 item.id === book.id
+    //                     ? { ...item, quantity: item.quantity + 1 }
+    //                     : item
+    //             );
+    //         }
 
-            return [...prev, { ...book, quantity: 1 }];
-        });
-    };
+    //         return [...prev, { ...book, quantity: 1 }];
+    //     });
+
+    //     window.dispatchEvent(
+    //         new CustomEvent("cart:add", {
+    //             detail: {
+    //                 button: event.currentTarget
+    //             }
+    //         })
+    //     );
+    // };
+const addToCart = (book, button = null) => {
+
+    setCart(prev => {
+        const existing = prev.find(item => item.id === book.id);
+
+        if (existing) {
+            return prev.map(item =>
+                item.id === book.id
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            );
+        }
+
+        return [...prev, { ...book, quantity: 1 }];
+    });
+
+    window.dispatchEvent(
+        new CustomEvent("cart:add", {
+            detail: { book }
+        })
+    );
+
+    if (button) {
+        window.dispatchEvent(
+            new CustomEvent("cart:fly", {
+                detail: { button }
+            })
+        );
+    }
+};
+
+const confirmAddToCart = (book, button) => {
+    setCart(prev => {
+        const existing = prev.find(item => item.id === book.id);
+
+        if (existing) {
+            return prev.map(item =>
+                item.id === book.id
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            );
+        }
+
+        return [...prev, { ...book, quantity: 1 }];
+    });
+
+    window.dispatchEvent(
+        new CustomEvent("cart:add", {
+            detail: { button }
+        })
+    );
+
+    setPendingAdd(null);
+};
 
     // Supprimer un livre
     const removeFromCart = (id) => {
