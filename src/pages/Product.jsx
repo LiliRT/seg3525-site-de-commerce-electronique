@@ -70,7 +70,7 @@ export default function Product() {
                     <p><strong>Genre :</strong> {book.genre}</p>
                     <p><strong>Formats :</strong> {book.formats.join(", ")}</p>
 
-                    <Button onClick={() => addToCart(book)}>
+                    <Button onClick={(e) => addToCart(book, e.currentTarget)}>
                         Ajouter au panier
                     </Button>
                 </div>

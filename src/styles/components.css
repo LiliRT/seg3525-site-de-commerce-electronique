@@ -7,13 +7,12 @@ BUTTONS
     align-items:center;
     justify-content:center;
     gap:.5rem;
-
     padding:.85rem 1.5rem;
     border:none;
     border-radius:var(--radius);
     cursor:pointer;
-
     transition: all .2s ease;
+    font-size:.85rem;
 }
 
 .btn-primary{
@@ -24,6 +23,7 @@ BUTTONS
 .btn-primary:hover{
     background: var(--button-hover);
     color:white;
+    transform: scale(1.05);
 }
 
 .btn-secondary{
@@ -35,25 +35,100 @@ BUTTONS
 .btn-secondary:hover{
     background: var(--accent);
     color:white;
-}
-
-.btn:active{
-    transform: scale(0.97);
+    transform: scale(1.05);
 }
 
 /* ===========================
-CARDS
+BOOK CARD
 =========================== */
 
-.card{
+.book-card {
+    display: flex;
+    flex-direction: column;
 
-    background:var(--card);
+    background: var(--card);
 
-    border-radius:var(--radius);
+    border-radius: var(--radius);
 
-    box-shadow:var(--shadow);
+    overflow: hidden;
 
-    padding:1.5rem;
+    box-shadow: var(--shadow);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 12px 28px rgba(0,0,0,.12);
+}
+
+.book-card-link {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+
+    color: inherit;
+    text-decoration: none;
+}
+
+.book-info {
+    padding: 1.25rem;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: .5rem;
+}
+
+.book-info h3 {
+    margin: 0;
+
+    font-size: 1.1rem;
+    line-height: 1.35;
+
+    min-height: 2.8em;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+.book-info .author {
+    margin: 0;
+
+    color: #777;
+
+    font-size: .9rem;
+}
+
+.book-info .price {
+    margin: .25rem 0 0;
+
+    font-weight: 700;
+
+    font-size: 1.1rem;
+
+    color: var(--accent);
+}
+
+.book-actions {
+    display: flex;
+
+    gap: .75rem;
+
+    padding:
+        0 1.25rem
+        1.25rem;
+}
+
+.book-actions .btn {
+    flex: 1;
 }
 
 /* ===========================
@@ -185,7 +260,7 @@ textarea:focus{
 }
 
 /* ===========================
-BOOK 3D
+BOOK COVER
 =========================== */
 
 .book-scene {
@@ -273,10 +348,6 @@ BOOK 3D
     transform-origin: left;
 }
 
-/* ===========================
-CONTENT
-=========================== */
-
 .book-icon {
     font-size: 1.2rem;
     opacity: 0.9;
@@ -297,10 +368,6 @@ CONTENT
     font-size: 0.75rem;
     opacity: 0.85;
 }
-
-/* ===========================
-CODEX
-=========================== */
 
 .codex-sign {
     position: absolute;

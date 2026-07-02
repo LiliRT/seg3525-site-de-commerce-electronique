@@ -1,4 +1,6 @@
-import { createContext, useContext, useEffect, useState, useRef } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+
+import { getDiscountedPrice } from "../utils/pricing";
 
 const CartContext = createContext();
 
@@ -9,7 +11,6 @@ export function useCart() {
 export function CartProvider({ children }) {
 
     const [cart, setCart] = useState([]);
-    const cartRef = useRef();
 
     // Charger depuis localStorage
     useEffect(() => {
@@ -25,88 +26,56 @@ export function CartProvider({ children }) {
     }, [cart]);
 
     // Ajouter un livre
-    // const addToCart = (book, event) => {
-    //     setCart((prev) => {
+    const addToCart = (book, button = null) => {
+        const pricing = getDiscountedPrice(book);
 
-    //         const existing = prev.find(item => item.id === book.id);
+        setCart(prev => {
 
-    //         if (existing) {
-    //             return prev.map(item =>
-    //                 item.id === book.id
-    //                     ? { ...item, quantity: item.quantity + 1 }
-    //                     : item
-    //             );
-    //         }
+            const existing = prev.find(item => item.id === book.id);
 
-    //         return [...prev, { ...book, quantity: 1 }];
-    //     });
+            if (existing) {
+                return prev.map(item =>
+                    item.id === book.id
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
+                );
+            }
 
-    //     window.dispatchEvent(
-    //         new CustomEvent("cart:add", {
-    //             detail: {
-    //                 button: event.currentTarget
-    //             }
-    //         })
-    //     );
-    // };
-const addToCart = (book, button = null) => {
+            return [
+                ...prev,
+                {
+                    ...book,
+                    price: pricing.finalPrice,
+                    originalPrice: pricing.originalPrice,
+                    hasDiscount: pricing.hasDiscount,
+                    quantity: 1
+                }
+            ];
+        });
 
-    setCart(prev => {
-        const existing = prev.find(item => item.id === book.id);
-
-        if (existing) {
-            return prev.map(item =>
-                item.id === book.id
-                    ? { ...item, quantity: item.quantity + 1 }
-                    : item
-            );
-        }
-
-        return [...prev, { ...book, quantity: 1 }];
-    });
-
-    window.dispatchEvent(
-        new CustomEvent("cart:add", {
-            detail: { book }
-        })
-    );
-
-    if (button) {
         window.dispatchEvent(
-            new CustomEvent("cart:fly", {
-                detail: { button }
+            new CustomEvent("cart:add", {
+                detail: {
+                    book,
+                    button
+                }
             })
         );
-    }
-};
-
-const confirmAddToCart = (book, button) => {
-    setCart(prev => {
-        const existing = prev.find(item => item.id === book.id);
-
-        if (existing) {
-            return prev.map(item =>
-                item.id === book.id
-                    ? { ...item, quantity: item.quantity + 1 }
-                    : item
-            );
-        }
-
-        return [...prev, { ...book, quantity: 1 }];
-    });
-
-    window.dispatchEvent(
-        new CustomEvent("cart:add", {
-            detail: { button }
-        })
-    );
-
-    setPendingAdd(null);
-};
+    };
 
     // Supprimer un livre
     const removeFromCart = (id) => {
-        setCart(prev => prev.filter(item => item.id !== id));
+
+        const item = cart.find(i => i.id === id);
+        if (!item) return;
+
+        setCart(prev => prev.filter(i => i.id !== id));
+
+        window.dispatchEvent(
+            new CustomEvent("cart:remove", {
+                detail: { item }
+            })
+        );
     };
 
     // Modifier quantité
@@ -122,6 +91,15 @@ const confirmAddToCart = (book, button) => {
 
     // Vider panier
     const clearCart = () => {
+
+        if (cart.length === 0) return;
+
+        window.dispatchEvent(
+            new CustomEvent("cart:clear", {
+                detail: { items: cart }
+            })
+        );
+
         setCart([]);
     };
 
@@ -144,7 +122,8 @@ const confirmAddToCart = (book, button) => {
         updateQuantity,
         clearCart,
         totalPrice,
-        cartCount
+        cartCount,
+        setCart
     };
 
     return (

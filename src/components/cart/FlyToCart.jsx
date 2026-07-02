@@ -1,62 +1,51 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createRoot } from "react-dom/client";
+import FlyingBook from "./FlyingBook";
 
 export default function FlyToCart() {
+    const [flyingItems, setFlyingItems] = useState([]);
 
     useEffect(() => {
-
         const animate = (e) => {
-
-            const button = e.detail?.button;
+            const { button, book } = e.detail || {};
             const cart = document.getElementById("cart-button");
 
-            if (!button || !cart) {
-                console.log("FlyToCart aborted", { button, cart });
-                return;
-            }
+            if (!button || !cart || !book) return;
 
             const start = button.getBoundingClientRect();
             const end = cart.getBoundingClientRect();
 
-            const icon = document.createElement("i");
-            icon.className = "bi bi-book-fill flying-book";
+            const id = Date.now() + Math.random();
 
-            document.body.appendChild(icon);
+            const newItem = {
+                id,
+                book,
+                start,
+                end
+            };
 
-            const startX = start.left + start.width / 2;
-            const startY = start.top + window.scrollY;
+            setFlyingItems((prev) => [...prev, newItem]);
 
-            const endX = end.left + end.width / 2;
-            const endY = end.top + window.scrollY;
-
-            icon.style.left = `${startX}px`;
-            icon.style.top = `${startY}px`;
-
-            requestAnimationFrame(() => {
-                icon.style.left = `${endX}px`;
-                icon.style.top = `${endY}px`;
-
-                icon.style.transform =
-                    "translate(-50%,-50%) scale(.6) rotate(360deg)";
-
-                icon.style.opacity = "0";
-            });
-
+            // cleanup automatique
             setTimeout(() => {
-                icon.remove();
-
-                cart.classList.add("cart-bump");
-                setTimeout(() => cart.classList.remove("cart-bump"), 250);
-
-            }, 1200);
+                setFlyingItems((prev) =>
+                    prev.filter((item) => item.id !== id)
+                );
+            }, 900);
         };
 
-        window.addEventListener("cart:fly", animate);
+        window.addEventListener("cart:add", animate);
 
-        return () =>
-            window.removeEventListener("cart:fly", animate);
-
+        return () => {
+            window.removeEventListener("cart:add", animate);
+        };
     }, []);
 
-    return null;
-
+    return (
+        <>
+            {flyingItems.map((item) => (
+                <FlyingBook key={item.id} item={item} />
+            ))}
+        </>
+    );
 }

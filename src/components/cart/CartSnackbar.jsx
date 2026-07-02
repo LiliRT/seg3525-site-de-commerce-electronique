@@ -3,59 +3,108 @@ import { useCart } from "../../context/CartContext";
 
 export default function CartSnackbar() {
 
-    const { removeFromCart } = useCart();
-    const [item, setItem] = useState(null);
-    const [visible, setVisible] = useState(false);
+    const [snacks, setSnacks] = useState([]);
+    const { setCart } = useCart();
 
     useEffect(() => {
 
-        const handler = (e) => {
+        const addSnack = (type, payload) => {
 
-            const book = e.detail?.book;
+            const id = crypto.randomUUID();
 
-            if (!book) return;
+            const snack = {
+                id,
+                type,
+                data: payload
+            };
 
-            setItem(book);
-            setVisible(true);
+            setSnacks(prev => [...prev, snack]);
 
-            const timer = setTimeout(() => {
-                setVisible(false);
+            setTimeout(() => {
+                setSnacks(prev => prev.filter(s => s.id !== id));
             }, 5000);
-
-            return () => clearTimeout(timer);
         };
 
-        window.addEventListener("cart:add", handler);
+        const onAdd = (e) => addSnack("add", e.detail.book);
+        const onRemove = (e) => addSnack("remove", e.detail.item);
+        const onClear = (e) => addSnack("clear", e.detail.items);
 
-        return () => window.removeEventListener("cart:add", handler);
+        window.addEventListener("cart:add", onAdd);
+        window.addEventListener("cart:remove", onRemove);
+        window.addEventListener("cart:clear", onClear);
+
+        return () => {
+            window.removeEventListener("cart:add", onAdd);
+            window.removeEventListener("cart:remove", onRemove);
+            window.removeEventListener("cart:clear", onClear);
+        };
 
     }, []);
 
-    if (!visible || !item) return null;
+    const closeSnack = (id) => {
+        setSnacks(prev => prev.filter(s => s.id !== id));
+    };
 
-    const undo = () => {
-        removeFromCart(item.id);
-        setVisible(false);
+    const undo = (snack) => {
+
+        switch (snack.type) {
+
+            case "add":
+                setCart(prev => prev.filter(i => i.id !== snack.data.id));
+                break;
+
+            case "remove":
+                setCart(prev => [...prev, snack.data]);
+                break;
+
+            case "clear":
+                setCart(snack.data);
+                break;
+        }
+
+        closeSnack(snack.id);
+    };
+
+    const renderText = (snack) => {
+
+        switch (snack.type) {
+
+            case "add":
+                return `📚 ${snack.data.title} ajouté au panier`;
+
+            case "remove":
+                return `🗑️ ${snack.data.title} retiré du panier`;
+
+            case "clear":
+                return `🧹 Panier vidé`;
+
+            default:
+                return "";
+        }
     };
 
     return (
-        <div className="cart-snackbar top">
+        <div className="snackbar-stack">
 
-            <div>
-                📚 <strong>{item.title}</strong> ajouté au panier
-            </div>
+            {snacks.map(snack => (
+                <div key={snack.id} className="cart-snackbar">
 
-            <div className="cart-snackbar-actions">
+                    <div>{renderText(snack)}</div>
 
-                <button onClick={undo}>
-                    Annuler l'ajout au panier
-                </button>
+                    <div className="cart-snackbar-actions">
 
-                <button onClick={() => setVisible(false)}>
-                    <i className="bi bi-x"></i>
-                </button>
+                        <button onClick={() => undo(snack)}>
+                            Annuler
+                        </button>
 
-            </div>
+                        <button onClick={() => closeSnack(snack.id)}>
+                            <i className="bi bi-x"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+            ))}
 
         </div>
     );

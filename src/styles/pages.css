@@ -9,7 +9,7 @@ HOME
 }
 
 .home-actions{
-    margin-top:1.5rem;
+    margin-top:1rem;
 }
 
 .promo-section{
@@ -18,9 +18,9 @@ HOME
 
 .promo-box{
     text-align:center;
-    padding:2rem;
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
+    /* padding:2rem; */
+    /* border-radius:var(--radius); */
+    /* box-shadow:var(--shadow); */
 }
 
 .promo-text{
@@ -223,20 +223,6 @@ CATALOGUE
     gap:.5rem;
 }
 
-/* .filters-header-actions button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0;
-    margin: 0;
-
-    background: transparent;
-    border: none;
-
-    line-height: 1;
-} */
-
 .filters-header-actions i {
     display: block;
     line-height: 1;
@@ -360,7 +346,7 @@ PRODUCT
 
     flex-direction:column;
 
-    gap:.8rem;
+    gap:.7rem;
 }
 
 .description{
@@ -400,41 +386,53 @@ CART
     gap:2rem;
 }
 
-.cart-item{
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 
-    display:flex;
+    background: var(--card);
+    padding: 1rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
 
-    align-items:center;
+    margin-bottom: 1rem;
 
-    gap:1rem;
-
-    background:var(--card);
-
-    padding:1rem;
-
-    border-radius:var(--radius);
-
-    box-shadow:var(--shadow);
-
-    margin-bottom:1rem;
-
-    flex-wrap:wrap;
-}
-
-.cart-item img{
-
-    width:80px;
-
-    height:100px;
-
-    object-fit:cover;
-
-    border-radius:var(--radius);
+    flex-wrap: nowrap;
 }
 
 .cart-info{
 
     flex:1;
+}
+
+.cart-info h3 {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.cart-info p {
+    margin: 0.2rem 0;
+    color: #666;
+}
+
+.cart-cover {
+    width: 90px;
+    height: 120px;
+
+    flex-shrink: 0;
+
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+}
+
+.cart-cover .book-scene {
+    transform: scale(0.35);
+    transform-origin: top left;
+
+    width: 320px;
+    height: 320px;
 }
 
 .quantity{
@@ -450,9 +448,9 @@ CART
 
 .quantity button{
 
-    width:30px;
+    width:25px;
 
-    height:30px;
+    height:25px;
 
     border:none;
 
@@ -463,6 +461,27 @@ CART
     border-radius:5px;
 
     cursor:pointer;
+}
+
+.price-block {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.old-price {
+    text-decoration: line-through;
+    opacity: 0.5;
+    font-size: 0.9em;
+}
+
+.new-price {
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.price {
+    font-weight: bold;
 }
 
 .remove{

@@ -1,4 +1,5 @@
 import { useCart } from "../../context/CartContext";
+import BookCover from "../books/BookCover";
 
 export default function CartItem({ item }) {
 
@@ -7,7 +8,14 @@ export default function CartItem({ item }) {
     return (
         <div className="cart-item">
 
-            <img src={item.cover} alt={item.title} />
+            <div className="cart-cover">
+                <BookCover
+                    title={item.title}
+                    author={item.author}
+                    genre={item.genre}
+                    minimal={true}
+                />
+            </div>
 
             <div className="cart-info">
 
@@ -15,16 +23,32 @@ export default function CartItem({ item }) {
 
                 <p>{item.author}</p>
 
-                <p>{item.price.toFixed(2)} $</p>
+                <div className="price-block">
+                    {item.hasDiscount && (
+                        <span className="old-price">
+                            {item.originalPrice.toFixed(2)} $
+                        </span>
+                    )}
+
+                    <span className="new-price">
+                        {item.price.toFixed(2)} $
+                    </span>
+                </div>
 
                 <div className="quantity">
 
                     <button
                         onClick={() =>
-                            updateQuantity(item.id, item.quantity - 1)
+                            {
+                                if (item.quantity === 1) {
+                                    removeFromCart(item.id);
+                                } else {
+                                    updateQuantity(item.id, item.quantity - 1);
+                                }
+                            }
                         }
                     >
-                        -
+                        <i className="bi bi-dash-lg"></i>
                     </button>
 
                     <span>{item.quantity}</span>
@@ -34,7 +58,7 @@ export default function CartItem({ item }) {
                             updateQuantity(item.id, item.quantity + 1)
                         }
                     >
-                        +
+                        <i className="bi bi-plus-lg"></i>
                     </button>
 
                 </div>

@@ -9,7 +9,11 @@ export default function Home() {
 
     const navigate = useNavigate();
 
-    const featuredBooks = books.slice(0, 4);
+    const featuredIds = [1, 7, 16, 23];
+
+    const featuredBooks = books.filter(book =>
+        featuredIds.includes(book.id)
+    );
 
     const [search, setSearch] = useState("");
 

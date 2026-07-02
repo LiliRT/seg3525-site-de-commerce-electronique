@@ -1,50 +1,71 @@
-import { Link } from "react-router-dom";
-import Button from "../common/Button";
-
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
-import BookCover from "../books/BookCover";
+
+import Button from "../common/Button";
+import BookCover from "./BookCover";
+import { getDiscountedPrice } from "../../utils/pricing";
 
 export default function BookCard({ book }) {
 
     const { addToCart } = useCart();
+    const navigate = useNavigate();
+    const pricing = getDiscountedPrice(book);
 
     return (
-        <div className="book-card">
+        <article className="book-card">
 
-            <Link to={`/livre/${book.id}`}>
+            <Link
+                to={`/livre/${book.id}`}
+                className="book-card-link"
+            >
                 <BookCover
                     title={book.title}
                     author={book.author}
                     genre={book.genre}
                 />
-            
+
                 <div className="book-info">
 
                     <h3>{book.title}</h3>
-                    <p className="author">{book.author}</p>
-                    <p className="price">{book.price.toFixed(2)} $</p>
 
-                    <div className="book-actions">
+                    <p className="author">
+                        {book.author}
+                    </p>
 
-                        <Button
-                            onClick={(e) => addToCart(book, e.currentTarget)}
-                            variant="primary"
-                        >
-                            Ajouter au panier
-                        </Button>
+                    <div className="price-block">
+                        {pricing.hasDiscount && (
+                            <span className="old-price">
+                                {pricing.originalPrice.toFixed(2)} $
+                            </span>
+                        )}
 
-                        <Link
-                            to={`/livre/${book.id}`}
-                            className="btn btn-secondary"
-                        >
-                            Voir les détails
-                        </Link>
-
+                        <span className={pricing.hasDiscount ? "new-price" : "price"}>
+                            {pricing.finalPrice.toFixed(2)} $
+                        </span>
                     </div>
 
                 </div>
+
             </Link>
 
-        </div>
+            <div className="book-actions">
+
+                <Button
+                    variant="primary"
+                    onClick={(e) => addToCart(book, e.currentTarget)}
+                >
+                    Ajouter au panier
+                </Button>
+
+                <Button
+                    variant="secondary"
+                    onClick={() => navigate(`/livre/${book.id}`)}
+                >
+                    Voir les détails
+                </Button>
+
+            </div>
+
+        </article>
     );
 }

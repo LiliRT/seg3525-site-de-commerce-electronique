@@ -2,7 +2,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 import Logo from "../../assets/Logo";
 
-export default function BookCover({ title, author, genre }) {
+export default function BookCover({ title, author, genre, className="", minimal=false }) {
 
     const genreMap = {
         "Roman classique": { color: "#8B5E3C", icon: "bi-book" },
@@ -18,31 +18,28 @@ export default function BookCover({ title, author, genre }) {
     const config = genreMap[genre] || genreMap["Roman classique"];
 
     return (
-        <div className="book-scene">
+        <div className={`book-scene ${className}`}>
 
-            <div className="book-bg" />
+            {!minimal && (
+                <div className="book-bg" />
+            )}
 
             <div className="book-3d">
-
-                <div
-                    className="book-face"
-                    style={{ backgroundColor: config.color }}
-                >
-
+                <div className="book-face" style={{ backgroundColor: config.color }}>
                     <i className={`bi ${config.icon} book-icon`} />
-
                     <div className="book-title">{title}</div>
                     <div className="book-author">{author}</div>
-
                 </div>
 
                 <div className="book-spine" />
             </div>
 
-            <div className="codex-sign">
-                <Logo size={16} />
-                <span>Codex</span>
-            </div>
+            {!minimal && (
+                <div className="codex-sign">
+                    <Logo size={16} />
+                    <span>Codex</span>
+                </div>
+            )}
 
         </div>
     );

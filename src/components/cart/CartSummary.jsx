@@ -4,24 +4,25 @@ import { Link } from "react-router-dom";
 export default function CartSummary() {
 
     const { cart, totalPrice, clearCart } = useCart();
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
     return (
         <div className="cart-summary">
 
             <h2>Résumé</h2>
 
-            <p>Articles : {cart.length}</p>
+            <p>{totalItems > 1 ? "Articles" : "Article"} : {totalItems}</p>
 
             <p className="total">
                 Total : {totalPrice.toFixed(2)} $
             </p>
 
-            <button onClick={clearCart} className="btn">
+            <button onClick={clearCart} className="btn btn-secondary">
                 Vider le panier
             </button>
 
             <Link to="/checkout">
-                <button className="btn primary">
+                <button className="btn btn-primary">
                     Passer commande
                 </button>
             </Link>
