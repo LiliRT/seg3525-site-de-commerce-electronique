@@ -42,7 +42,7 @@ export default function Product() {
         <main className="container section">
 
             <button className="btn btn-secondary" onClick={goBack}>
-                <i className="bi bi-arrow-left"></i> Retour
+                <i className="bi bi-arrow-left"></i> Retour au catalogue
             </button>
 
             <div className="product-layout">
@@ -66,9 +66,9 @@ export default function Product() {
 
                     <p className="price">{book.price.toFixed(2)} $</p>
 
-                    <p><strong>Stock :</strong> {book.stock}</p>
                     <p><strong>Langue :</strong> {book.language}</p>
                     <p><strong>Genre :</strong> {book.genre}</p>
+                    <p><strong>Date de publication :</strong> {book.originalYear}</p>
                     <p><strong>Formats :</strong> {book.formats.join(", ")}</p>
 
                     <div className="purchase-actions">

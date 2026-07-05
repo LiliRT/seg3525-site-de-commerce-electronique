@@ -27,7 +27,7 @@ export default function CartSummary() {
                 <div className="shipping-progress-header">
                     <span>
                         {shipping === 0
-                            ? "🚚 Félicitations! Vous profitez de la livraison gratuite."
+                            ? "Félicitations! Vous profitez de la livraison gratuite."
                             : <>Ajoutez encore <strong>{remaining.toFixed(2)} $</strong> pour obtenir la livraison gratuite. <Link to="/catalogue" className="shipping-note-catalogue">Aller au catalogue<i className="bi bi-arrow-right"></i></Link></>
                         }
                     </span>
@@ -60,7 +60,7 @@ export default function CartSummary() {
                 </div>
 
                 <div className="summary-line">
-                    <span>Livraison</span>
+                    <span>Frais de livraison</span>
 
                     <span>
                         {shipping === 0

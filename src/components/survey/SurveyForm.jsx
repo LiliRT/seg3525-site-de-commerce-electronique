@@ -53,7 +53,7 @@ export default function SurveyForm() {
 
             <h2>Comment s’est passée votre expérience ?</h2>
 
-            <p className="survey-subtext">Ce sondage est optionnel et prend moins d’une minute à remplir.</p>
+            <p className="survey-subtext">Ce sondage est optionnel et prend moins d’une minute à remplir. Il peut aussi être rempli via le lien fourni dans le courriel de confirmation d'achat.</p>
 
             <StarRating
                 rating={rating}
