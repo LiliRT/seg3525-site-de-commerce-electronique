@@ -1,4 +1,9 @@
+import { useEffect } from "react";
+
 export default function Help() {
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
 
     return (
         <main className="container section help-page">
@@ -9,71 +14,67 @@ export default function Help() {
                 Retrouvez ici les réponses aux questions les plus fréquentes.
             </p>
 
-            <div className="help-grid">
+            <div className="help-accordion">
 
-                <section className="help-card">
+                <details open>
+                    <summary>Acheter un livre</summary>
 
-                    <h2>
-                        <i className="bi bi-cart-check me-2"></i>
-                        {" "}Acheter un livre
-                    </h2>
+                    <div className="help-content">
+                        <ol>
+                            <li>Ajoutez un livre au panier.</li>
+                            <li>Ouvrez votre panier.</li>
+                            <li>Vérifiez votre sélection.</li>
+                            <li>Cliquez sur <strong>Passer commande</strong>.</li>
+                            <li>Remplissez le formulaire de livraison puis cliquez sur <strong>Suivant</strong>.</li>
+                            <li>Remplissez le formulaire de paiement puis cliquez sur <strong>Suivant</strong>.</li>
+                            <li>Vérifiez votre commande et utilisez <strong>Retour</strong> si nécessaire.</li>
+                            <li>Cliquez sur <strong>Confirmer la commande</strong>.</li>
+                            <li>Vous pouvez ensuite remplir le sondage d’appréciation.</li>
+                        </ol>
+                    </div>
+                </details>
 
-                    <ol>
-                        <li>Ajoutez un livre au panier</li>
-                        <li>Ouvrez votre panier</li>
-                        <li>Vérifiez votre sélection</li>
-                        <li>Procédez au paiement</li>
-                        <li>Confirmez votre commande</li>
-                    </ol>
+                <details>
+                    <summary>Utiliser les filtres</summary>
 
-                </section>
+                    <div className="help-content">
+                        <p>
+                            Dans le catalogue, utilisez les filtres pour affiner votre recherche.
+                        </p>
 
-                <section className="help-card">
+                        <p className="help-tip">
+                            Astuce : combinez plusieurs filtres pour des résultats plus précis.
+                        </p>
+                    </div>
+                </details>
 
-                    <h2>
-                        <i className="bi bi-funnel me-2"></i>
-                        {" "}Utiliser les filtres
-                    </h2>
+                <details>
+                    <summary>Suivi de commande</summary>
 
-                    <p>
-                        Dans le catalogue, utilisez les filtres pour affiner votre recherche.
-                    </p>
+                    <div className="help-content">
+                        <p>
+                            Dès que votre commande est traitée, vous recevez un courriel de confirmation avec votre numéro de commande.
+                        </p>
 
-                    <p className="help-tip">
-                        Astuce : combine plusieurs filtres pour affiner les résultats.
-                    </p>
+                        <p>
+                            Lors de l’expédition, un numéro de suivi vous sera envoyé. Les commandes sont généralement expédiées sous 24 à 48 heures.
+                        </p>
+                    </div>
+                </details>
 
-                </section>
+                <details>
+                    <summary>Support</summary>
 
-                <section className="help-card">
+                    <div className="help-content">
+                        <p>
+                            Notre équipe est disponible tous les jours de 8 h à 17 h.
+                        </p>
 
-                    <h2>
-                        <i className="bi bi-box-seam me-2"></i>
-                        {" "}Suivi de commande
-                    </h2>
-
-                    <p>
-                        Consultez vos commandes depuis votre espace utilisateur.
-                    </p>
-
-                </section>
-
-                <section className="help-card">
-
-                    <h2>
-                        <i className="bi bi-headset me-2"></i>
-                        {" "}Support
-                    </h2>
-
-                    <p>
-                        Ce projet est fictif, mais vous pouvez simuler un contact support.
-                    </p>
-
-                    <a href="mailto:info@codex.ca" className="btn btn-secondary">
-                        Contacter le support
-                    </a>
-
-                </section>
+                        <a href="mailto:info@codex.ca" className="help-btn">
+                            Contacter le support
+                        </a>
+                    </div>
+                </details>
 
             </div>
 

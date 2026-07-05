@@ -27,14 +27,13 @@ HEADER
 }
 
 .logo{
-
     font-family:var(--font-title);
-    color:var(--accent);
     font-size:1.6rem;
     font-weight:bold;
     display: flex;
     align-items: center;
     gap: .5rem;
+    padding: 0.5rem 0rem;
 }
 
 .logo svg {
@@ -45,21 +44,13 @@ HEADER
     transform: rotate(-3deg) scale(1.1);
 }
 
-/* .flying-book{
-    position:fixed;
-    z-index:99999;
-    pointer-events:none;
+.clair {
+    color:var(--accent);
+}
 
-    font-size:42px;
-
-    color:#8B5E3C;
-
-    transition:
-        left 1.2s cubic-bezier(.22,.61,.36,1),
-        top 1.2s cubic-bezier(.22,.61,.36,1),
-        transform 1.2s cubic-bezier(.22,.61,.36,1),
-        opacity 1.2s;
-} */
+.sombre {
+    color:var(--card);
+}
 
 .flying-book {
     will-change: transform, top, left, opacity;
@@ -226,8 +217,8 @@ FOOTER
 }
 
 .footer a:hover{
-
     color:#ddd;
+    text-decoration: underline;
 }
 
 .copyright{
@@ -366,6 +357,35 @@ SNACKBAR
 
 }
 
+@media (max-width: 768px) {
+
+    .snackbar-stack {
+        left: 1rem;
+        right: 1rem;
+        transform: none;
+    }
+
+    .cart-snackbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: .75rem;
+    }
+
+    .cart-snackbar-actions {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .cart-snackbar button {
+        width: 100%;
+    }
+
+    .shortcut {
+        display: none;
+    }
+}
+
 /* ===========================
 RESPONSIVE
 =========================== */
@@ -383,7 +403,7 @@ RESPONSIVE
 
         position:absolute;
 
-        top:60;
+        top:60px;
 
         right:10px;
 

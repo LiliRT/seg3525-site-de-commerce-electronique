@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import books from "../data/books";
 import { useCart } from "../context/CartContext";
@@ -12,6 +12,7 @@ export default function Product() {
     const { id } = useParams();
     const { addToCart } = useCart();
     const navigate = useNavigate();
+    const [quantity, setQuantity] = useState(1);
 
     const book = books.find(b => b.id === Number(id));
 
@@ -28,7 +29,7 @@ export default function Product() {
         return (
             <div className="container section">
                 <h2>Livre introuvable</h2>
-                <Link to="/catalogue">Retour au catalogue</Link>
+                <Link to="/catalogue" className="btn btn-primary">Retour au catalogue</Link>
             </div>
         );
     }
@@ -40,7 +41,7 @@ export default function Product() {
     return (
         <main className="container section">
 
-            <button className="back-link" onClick={goBack}>
+            <button className="btn btn-secondary" onClick={goBack}>
                 <i className="bi bi-arrow-left"></i> Retour
             </button>
 
@@ -70,9 +71,37 @@ export default function Product() {
                     <p><strong>Genre :</strong> {book.genre}</p>
                     <p><strong>Formats :</strong> {book.formats.join(", ")}</p>
 
-                    <Button onClick={(e) => addToCart(book, e.currentTarget)}>
-                        Ajouter au panier
-                    </Button>
+                    <div className="purchase-actions">
+
+                        <div className="quantity-selector">
+                            <label htmlFor="quantity">Qté</label>
+
+                            <select
+                                id="quantity"
+                                value={quantity}
+                                onChange={(e) => setQuantity(Number(e.target.value))}
+                            >
+                                {Array.from(
+                                    { length: Math.min(book.stock, 10) },
+                                    (_, i) => (
+                                        <option key={i + 1} value={i + 1}>
+                                            {i + 1}
+                                        </option>
+                                    )
+                                )}
+                            </select>
+                        </div>
+
+                        <Button
+                            onClick={(e) =>
+                                addToCart(book, e.currentTarget, quantity)
+                            }
+                        >
+                            <i className="bi bi-cart-plus"></i>
+                            Ajouter au panier
+                        </Button>
+
+                    </div>
                 </div>
             </div>
 

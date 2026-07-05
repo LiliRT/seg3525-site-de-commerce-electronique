@@ -1,4 +1,5 @@
 import CheckboxFilter from "./CheckboxFilter";
+import PriceSlider from "./PriceSlider";
 
 export default function FacetFilters({
     genres,
@@ -9,6 +10,7 @@ export default function FacetFilters({
     onChange,
     onReset,
     countByFacet,
+    countByPrice,
     isOpen,
     onClose
 }) {
@@ -61,6 +63,14 @@ export default function FacetFilters({
                         countByFacet={(value) => countByFacet("genre", value)}
                     />
 
+<PriceSlider
+    value={selected.maxPrice}
+    onChange={(val) =>
+        onChange({ ...selected, maxPrice: val })
+    }
+    countByPrice={countByPrice}
+/>
+
                     <CheckboxFilter
                         label="Formats"
                         options={formats}
@@ -92,7 +102,7 @@ export default function FacetFilters({
                     />
 
                     <button className="btn btn-secondary mobile" onClick={onReset}>
-                        Réinitialiser les filtres
+                        <i className="bi bi-arrow-counterclockwise"></i>Réinitialiser les filtres
                     </button>
 
                 </div>

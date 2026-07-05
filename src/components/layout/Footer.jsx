@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Logo from "../../assets/Logo";
 
 export default function Footer() {
 
@@ -10,7 +11,10 @@ export default function Footer() {
 
                 <div>
 
-                    <h3>Codex</h3>
+                    <Link to="/" className="logo sombre">
+                        <Logo size={36} color={"#FFFFFF"} />
+                        <span>Codex</span>
+                    </Link>
 
                     <p>
 

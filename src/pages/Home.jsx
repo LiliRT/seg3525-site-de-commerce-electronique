@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import SearchBar from "../components/layout/SearchBar";
 import books from "../data/books";
@@ -8,47 +8,24 @@ import BookGrid from "../components/books/BookGrid";
 export default function Home() {
 
     const navigate = useNavigate();
-
     const featuredIds = [1, 7, 16, 23];
-
-    const featuredBooks = books.filter(book =>
-        featuredIds.includes(book.id)
-    );
-
+    const featuredBooks = books.filter(book => featuredIds.includes(book.id));
     const [search, setSearch] = useState("");
-
-    const submitSearch = () => {
-
-        navigate("/catalogue", {
-            state: {
-                search
-            }
-        });
-
-    };
+    const submitSearch = () => { navigate("/catalogue", {state: {search}}); };
+    
+    useEffect(() => {window.scrollTo({ top: 0, behavior: "smooth" });}, []);
 
     return (
         <main>
-
             {/* HERO */}
             <section className="section">
 
                 <div className="container home-hero">
+                    <h1>Découvrez votre prochaine lecture</h1>
 
-                    <h1>
-                        Découvrez votre prochaine lecture
-                    </h1>
+                    <p>Explorez des romans, essais et bandes dessinées soigneusement sélectionnés pour enrichir votre expérience de lecture.</p>
 
-                    <p>
-                        Explorez des romans, essais et bandes dessinées soigneusement sélectionnés pour enrichir votre expérience de lecture.
-                    </p>
-
-                    <SearchBar
-                        value={search}
-                        onChange={setSearch}
-                        onSubmit={submitSearch}
-                        showButton
-                    />
+                    <SearchBar value={search} onChange={setSearch} onSubmit={submitSearch} showButton/>
 
                     <div className="home-actions">
 
@@ -75,13 +52,9 @@ export default function Home() {
 
                 <div className="container promo-box">
 
-                    <h2>
-                        Offre spéciale du moment
-                    </h2>
+                    <h2>Offre spéciale du moment</h2>
 
-                    <p className="promo-text">
-                        📚 Cette semaine seulement : profitez de -20% sur une sélection de romans classiques et philosophiques.
-                    </p>
+                    <p className="promo-text">📚 Cette semaine seulement : profitez de -20 % sur une sélection de romans classiques et philosophiques.</p>
 
                     <button
                         className="btn btn-secondary"
@@ -95,7 +68,7 @@ export default function Home() {
                             )
                         }
                     >
-                        Voir les offres
+                        Magasiner les livres en promotion
                     </button>
 
                 </div>
@@ -107,13 +80,9 @@ export default function Home() {
 
                 <div className="container">
 
-                    <h2>
-                        Nouveautés
-                    </h2>
+                    <h2>Nouveautés</h2>
 
-                    <p>
-                        Découvrez les derniers ajouts à notre collection.
-                    </p>
+                    <p>Découvrez les derniers ajouts à notre collection.</p>
 
                     <BookGrid books={featuredBooks} />
 

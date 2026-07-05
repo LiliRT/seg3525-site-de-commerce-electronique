@@ -3,30 +3,102 @@ import { Link } from "react-router-dom";
 
 export default function CartSummary() {
 
-    const { cart, totalPrice, clearCart } = useCart();
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const {
+        cart,
+        subtotal,
+        taxes,
+        shipping,
+        grandTotal,
+        clearCart
+    } = useCart();
+
+    const totalItems = cart.reduce( (sum, item) => sum + item.quantity, 0);
+
+    const FREE_SHIPPING = 50;
+
+    const progress = Math.min((subtotal / FREE_SHIPPING) * 100, 100);
+
+    const remaining = Math.max(FREE_SHIPPING - subtotal, 0);
 
     return (
-        <div className="cart-summary">
+        <div className="summary"> 
+            <div className="shipping-progress-card">
 
-            <h2>Résumé</h2>
+                <div className="shipping-progress-header">
+                    <span>
+                        {shipping === 0
+                            ? "🚚 Félicitations! Vous profitez de la livraison gratuite."
+                            : <>Ajoutez encore <strong>{remaining.toFixed(2)} $</strong> pour obtenir la livraison gratuite. <Link to="/catalogue" className="shipping-note-catalogue">Aller au catalogue<i className="bi bi-arrow-right"></i></Link></>
+                        }
+                    </span>
 
-            <p>{totalItems > 1 ? "Articles" : "Article"} : {totalItems}</p>
+                    <div className="shipping-info">
+                        <i className="bi bi-info-circle"></i>
 
-            <p className="total">
-                Total : {totalPrice.toFixed(2)} $
-            </p>
+                        <div className="shipping-tooltip">
+                            <strong>Livraison gratuite</strong>
+                            <p>La livraison standard est offerte pour toute commande de 50 $ ou plus, avant les taxes.</p>
+                        </div>
 
-            <button onClick={clearCart} className="btn btn-secondary">
-                Vider le panier
-            </button>
+                    </div>
+                </div>
 
-            <Link to="/checkout">
-                <button className="btn btn-primary">
-                    Passer commande
-                </button>
-            </Link>
+                <div className="shipping-progress-bar">
+                    <div className="shipping-progress-fill" style={{ width: `${progress}%` }}/>
+                </div>
+            </div>
 
-        </div>
+            <div className="cart-summary">
+
+                <h2>Résumé</h2>
+
+                <p>{totalItems} {totalItems > 1 ? "articles" : "article"}</p>
+
+                <div className="summary-line">
+                    <span>Sous-total</span>
+                    <span>{subtotal.toFixed(2)} $</span>
+                </div>
+
+                <div className="summary-line">
+                    <span>Livraison</span>
+
+                    <span>
+                        {shipping === 0
+                            ? "Gratuite"
+                            : `${shipping.toFixed(2)} $`}
+                    </span>
+                </div>
+
+                <div className="summary-line">
+                    <span>Taxes (TVH • 13 %)</span>
+                    <span>{taxes.toFixed(2)} $</span>
+                </div>
+
+                <hr />
+
+                <div className="summary-line total">
+                    <span>Total</span>
+                    <span>{grandTotal.toFixed(2)} $</span>
+                </div>
+
+                <div className="cart-summary-buttons">
+
+                    <button
+                        onClick={clearCart}
+                        className="btn btn-secondary"
+                    >
+                        Vider le panier
+                    </button>
+
+                    <Link to="/checkout">
+                        <button className="btn btn-primary">
+                            Passer commande
+                        </button>
+                    </Link>
+
+                </div>
+
+            </div>
+        </div>   
     );
 }

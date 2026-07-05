@@ -13,7 +13,7 @@ export default function Layout() {
     return (
         <>
             <div className="promo-bar">
-                📚 Offre de la semaine : -20% sur les romans classiques et philosophiques
+                📚 Offre de la semaine : -20 % sur les romans classiques et philosophiques
                 <button onClick={() =>
                         navigate(
                             "/catalogue?genre=Roman%20classique&genre=Philosophie", {
@@ -23,7 +23,7 @@ export default function Layout() {
                             }
                         )
                     }>
-                    Voir
+                    En profiter
                 </button>
             </div>
 

@@ -109,22 +109,16 @@ BOOK CARD
 
 .book-info .price {
     margin: .25rem 0 0;
-
     font-weight: 700;
-
     font-size: 1.1rem;
-
     color: var(--accent);
 }
 
 .book-actions {
     display: flex;
-
-    gap: .75rem;
-
-    padding:
-        0 1.25rem
-        1.25rem;
+    gap: .5rem;
+    justify-content: space-between;
+    padding: 0 1rem 1rem 1rem;
 }
 
 .book-actions .btn {
@@ -595,6 +589,88 @@ FILTERS
     height:18px;
     background: var(--accent);
     border-radius:2px;
+}
+
+.price-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+
+.price-label {
+    font-size: .95rem;
+    color: var(--text);
+}
+
+.price-slider {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.price-slider label {
+    font-size: .95rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.price-slider input[type="range"] {
+    --min: 10;
+    --max: 30;
+
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+/* La piste */
+.price-slider input[type="range"]::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(
+        to right,
+        var(--accent) 0%,
+        var(--accent) calc((var(--value) - var(--min)) / (var(--max) - var(--min)) * 100%),
+        #ddd calc((var(--value) - var(--min)) / (var(--max) - var(--min)) * 100%),
+        #ddd 100%
+    );
+}
+
+/* Le bouton */
+.price-slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: -4px;
+}
+
+/* Firefox */
+.price-slider input[type="range"]::-moz-range-track {
+    height: 4px;
+    border-radius: 999px;
+    background: #ddd;
+}
+
+.price-slider input[type="range"]::-moz-range-progress {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--accent);
+}
+
+.price-slider input[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    background: var(--accent);
 }
 
 /* ===========================

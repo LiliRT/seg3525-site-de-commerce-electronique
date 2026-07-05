@@ -96,6 +96,10 @@ main{
     padding:4rem 0;
 }
 
+.section h2 {
+    margin-top: 2rem;
+}
+
 .grid{
 
     display:grid;

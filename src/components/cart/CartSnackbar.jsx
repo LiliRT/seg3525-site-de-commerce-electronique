@@ -5,6 +5,7 @@ export default function CartSnackbar() {
 
     const [snacks, setSnacks] = useState([]);
     const { setCart } = useCart();
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
     useEffect(() => {
 
@@ -40,6 +41,33 @@ export default function CartSnackbar() {
         };
 
     }, []);
+
+useEffect(() => {
+
+    const handler = (e) => {
+
+        const isMac = navigator.userAgent.includes("Mac");
+
+        const shortcutPressed =
+            (isMac && e.metaKey && e.key.toLowerCase() === "z") ||
+            (!isMac && e.ctrlKey && e.key.toLowerCase() === "z");
+
+        if (!shortcutPressed) return;
+
+        if (snacks.length === 0) return;
+
+        e.preventDefault();
+
+        const lastSnack = snacks[snacks.length - 1];
+
+        undo(lastSnack);
+    };
+
+    window.addEventListener("keydown", handler);
+
+    return () => window.removeEventListener("keydown", handler);
+
+}, [snacks]);
 
     const closeSnack = (id) => {
         setSnacks(prev => prev.filter(s => s.id !== id));
@@ -83,6 +111,16 @@ export default function CartSnackbar() {
         }
     };
 
+    const tag = document.activeElement?.tagName;
+
+    if (
+        tag === "INPUT" ||
+        tag === "TEXTAREA" ||
+        document.activeElement?.isContentEditable
+    ) {
+        return;
+    }
+
     return (
         <div className="snackbar-stack">
 
@@ -94,7 +132,12 @@ export default function CartSnackbar() {
                     <div className="cart-snackbar-actions">
 
                         <button onClick={() => undo(snack)}>
-                            Annuler
+                            Annuler{" "}
+                            {!isMobile && (
+                                <span className="shortcut">
+                                    (Cmd/Ctrl + Z)
+                                </span>
+                            )}
                         </button>
 
                         <button onClick={() => closeSnack(snack.id)}>

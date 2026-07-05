@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
 
 import books from "../data/books";
@@ -10,13 +10,14 @@ import publishers from "../data/publishers";
 import BookGrid from "../components/books/BookGrid";
 import FacetFilters from "../components/filters/FacetFilters";
 import SearchBar from "../components/layout/SearchBar";
+import { getDiscountedPrice } from "../utils/pricing";
 
 const getInitialFilters = (searchParams) => ({
     genre: searchParams.getAll("genre"),
     language: searchParams.getAll("language"),
     publisher: searchParams.getAll("publisher"),
     format: searchParams.getAll("format"),
-    maxPrice: Number(searchParams.get("maxPrice")) || 40,
+    maxPrice: searchParams.get("maxPrice") ? Number(searchParams.get("maxPrice")) : 40,
     search: searchParams.get("search") || "",
     sort: searchParams.get("sort") || "title"
 });
@@ -34,6 +35,19 @@ export default function Catalogue() {
     const navigate = useNavigate();
 
     const location = useLocation();
+
+    const enrichedBooks = useMemo(() => {
+        return books.map(book => {
+            const pricing = getDiscountedPrice(book);
+
+            return {
+                ...book,
+                finalPrice: pricing.finalPrice
+            };
+        });
+    }, []);
+
+    useEffect(() => {window.scrollTo({ top: 0, behavior: "smooth" });}, []);
 
     const goBack = () => {
         if (window.history.state?.idx > 0) {
@@ -63,8 +77,7 @@ export default function Catalogue() {
                 filters.format.length === 0 ||
                 book.formats.some(f => filters.format.includes(f));
 
-            const matchPrice =
-                book.price <= filters.maxPrice;
+            const matchPrice = book.finalPrice <= filters.maxPrice;
 
             const search = (filters.search || "").toLowerCase();
 
@@ -84,15 +97,15 @@ export default function Catalogue() {
         });
     };
 
-    const filteredBooks = applyFilters(books, filters).sort((a, b) => {
+    const filteredBooks = applyFilters(enrichedBooks, filters).sort((a, b) => {
 
         switch (filters.sort) {
 
             case "price_asc":
-                return a.price - b.price;
+                return a.finalPrice - b.finalPrice;
 
             case "price_desc":
-                return b.price - a.price;
+                return b.finalPrice - a.finalPrice;
 
             case "year":
                 return b.originalYear - a.originalYear;
@@ -125,7 +138,16 @@ export default function Catalogue() {
             testFilters.format = [value];
         }
 
-        return applyFilters(books, testFilters).length;
+        return applyFilters(enrichedBooks, testFilters).length;
+    };
+
+    const countByPrice = (maxPrice) => {
+        const testFilters = {
+            ...filters,
+            maxPrice
+        };
+
+        return applyFilters(enrichedBooks, testFilters).length;
     };
 
     const activeFilters = [];
@@ -152,7 +174,7 @@ export default function Catalogue() {
             language: [],
             publisher: [],
             format: [],
-            maxPrice: 40,
+            maxPrice: 30,
             search: prev.search,
             sort: "title"
         }));
@@ -238,6 +260,7 @@ export default function Catalogue() {
                     onChange={setFilters}
                     onReset={clearFiltersExceptSearch}
                     countByFacet={countByFacet}
+                    countByPrice={countByPrice}
                     isOpen={isFilterOpen}
                     onClose={() => setIsFilterOpen(false)}
                 />
@@ -352,20 +375,11 @@ export default function Catalogue() {
                                         onClick={clearFiltersExceptSearch}
                                     >
                                         <i className="bi bi-funnel"></i>
-                                        Réinitialiser
+                                        Réinitialiser les filtres
                                     </button>
 
                                 </div>
                             )}
-
-                            <button
-                                className="btn btn-secondary"
-                                onClick={clearFiltersExceptSearch}
-                            >
-                                <i className="bi bi-funnel"></i>
-                                Retirer les filtres
-                            </button>
-
                         </div>
                     )}
 

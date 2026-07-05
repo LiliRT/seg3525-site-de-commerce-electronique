@@ -26,7 +26,7 @@ export function CartProvider({ children }) {
     }, [cart]);
 
     // Ajouter un livre
-    const addToCart = (book, button = null) => {
+    const addToCart = (book, button = null, quantity = 1) => {
         const pricing = getDiscountedPrice(book);
 
         setCart(prev => {
@@ -36,7 +36,7 @@ export function CartProvider({ children }) {
             if (existing) {
                 return prev.map(item =>
                     item.id === book.id
-                        ? { ...item, quantity: item.quantity + 1 }
+                        ? { ...item, quantity: item.quantity + quantity }
                         : item
                 );
             }
@@ -48,7 +48,7 @@ export function CartProvider({ children }) {
                     price: pricing.finalPrice,
                     originalPrice: pricing.originalPrice,
                     hasDiscount: pricing.hasDiscount,
-                    quantity: 1
+                    quantity
                 }
             ];
         });
@@ -90,24 +90,34 @@ export function CartProvider({ children }) {
     };
 
     // Vider panier
-    const clearCart = () => {
+    const clearCart = (showSnackbar = true) => {
 
         if (cart.length === 0) return;
 
-        window.dispatchEvent(
-            new CustomEvent("cart:clear", {
-                detail: { items: cart }
-            })
-        );
+        if (showSnackbar) {
+            window.dispatchEvent(
+                new CustomEvent("cart:clear", {
+                    detail: { items: cart }
+                })
+            );
+        }
 
         setCart([]);
     };
 
     // Total
-    const totalPrice = cart.reduce(
+    const subtotal = cart.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
     );
+
+    const shipping = subtotal >= 50 || subtotal === 0
+        ? 0
+        : 9.99;
+
+    const taxes = (subtotal + shipping) * 0.13;
+
+    const grandTotal = subtotal + taxes + shipping;
 
     // Nombre d’articles
     const cartCount = cart.reduce(
@@ -121,7 +131,10 @@ export function CartProvider({ children }) {
         removeFromCart,
         updateQuantity,
         clearCart,
-        totalPrice,
+        subtotal,
+        shipping,
+        taxes,
+        grandTotal,
         cartCount,
         setCart
     };

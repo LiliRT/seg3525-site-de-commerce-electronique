@@ -54,14 +54,14 @@ export default function BookCard({ book }) {
                     variant="primary"
                     onClick={(e) => addToCart(book, e.currentTarget)}
                 >
-                    Ajouter au panier
+                    <i className="bi bi-cart-plus"/>Ajouter
                 </Button>
 
                 <Button
                     variant="secondary"
                     onClick={() => navigate(`/livre/${book.id}`)}
                 >
-                    Voir les détails
+                    <i className="bi bi-info-circle"/>Détails
                 </Button>
 
             </div>
