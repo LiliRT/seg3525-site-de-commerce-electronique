@@ -701,6 +701,7 @@ CART
 
 .price {
     font-weight: bold;
+    font-size: 1.3em;
 }
 
 .remove{
@@ -725,6 +726,10 @@ CART
     display:flex;
     justify-content:space-between;
     padding-top: 0.5rem;
+}
+
+.cart-summary h2 {
+    margin-top: 0px;
 }
 
 .total{

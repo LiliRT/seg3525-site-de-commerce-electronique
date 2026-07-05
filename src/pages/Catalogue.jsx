@@ -168,6 +168,13 @@ export default function Catalogue() {
         activeFilters.push({ type: "format", value: v })
     );
 
+    if (filters.maxPrice !== 40) {
+        activeFilters.push({
+            type: "maxPrice",
+            value: `Prix max: ${filters.maxPrice} $`
+        });
+    }
+
     const clearFiltersExceptSearch = () => {
         setFilters(prev => ({
             genre: [],
@@ -284,10 +291,19 @@ export default function Catalogue() {
 
                                         <button
                                             onClick={() => {
-                                                setFilters(prev => ({
-                                                    ...prev,
-                                                    [f.type]: prev[f.type].filter(v => v !== f.value)
-                                                }));
+                                                setFilters(prev => {
+                                                    if (f.type === "maxPrice") {
+                                                        return {
+                                                            ...prev,
+                                                            maxPrice: 40
+                                                        };
+                                                    }
+
+                                                    return {
+                                                        ...prev,
+                                                        [f.type]: prev[f.type].filter(v => v !== f.value)
+                                                    };
+                                                });
                                             }}
                                         >
                                             <i className="bi bi-x"></i>
@@ -356,10 +372,19 @@ export default function Catalogue() {
 
                                                 <button
                                                     onClick={() => {
-                                                        setFilters(prev => ({
-                                                            ...prev,
-                                                            [f.type]: prev[f.type].filter(v => v !== f.value)
-                                                        }));
+                                                        setFilters(prev => {
+                                                            if (f.type === "maxPrice") {
+                                                                return {
+                                                                    ...prev,
+                                                                    maxPrice: 40
+                                                                };
+                                                            }
+
+                                                            return {
+                                                                ...prev,
+                                                                [f.type]: prev[f.type].filter(v => v !== f.value)
+                                                            };
+                                                        });
                                                     }}
                                                 >
                                                     <i className="bi bi-x"></i>

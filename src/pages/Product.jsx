@@ -65,11 +65,13 @@ export default function Product() {
                     <p className="description">{book.description}</p>
 
                     <p className="price">{book.price.toFixed(2)} $</p>
-
-                    <p><strong>Langue :</strong> {book.language}</p>
+                    
                     <p><strong>Genre :</strong> {book.genre}</p>
-                    <p><strong>Date de publication :</strong> {book.originalYear}</p>
                     <p><strong>Formats :</strong> {book.formats.join(", ")}</p>
+                    <p><strong>Langue :</strong> {book.language}</p>
+                    <p><strong>Éditeur :</strong> {book.publisher}</p>
+                    <p><strong>Date de publication :</strong> {book.originalYear}</p>
+                    <p><strong>ISBN :</strong> {book.isbn}</p>
 
                     <div className="purchase-actions">
 
